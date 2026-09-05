@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "savegame-editor"
+version = "0.1.0"
+description = "Local-only desktop editor for Solo Leveling: ARISE OVERDRIVE saves"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "SaveGameEditor contributors" }]
+dependencies = [
+    "PySide6>=6.8",
+    "qasync>=0.27",
+]
+
+[dependency-groups]
+build = [
+    "pyinstaller>=6.22.2",
+]
+dev = [
+    "pytest>=8.3",
+    "pyright>=1.1.390",
+    "ruff>=0.9",
+]
+
+[project.scripts]
+savegame-editor = "savegame_editor.app:run"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/savegame_editor"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.12"
+typeCheckingMode = "standard"
+reportMissingTypeStubs = false

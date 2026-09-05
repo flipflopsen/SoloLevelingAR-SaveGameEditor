@@ -1,0 +1,261 @@
+{
+    "format_version": 1,
+    "game": "Solo Leveling: ARISE OVERDRIVE",
+    "source": {
+        "save_dump": "LocalSave_20260824_191932.db.sql",
+        "mapping_evidence": "Static analysis of SoloLevelingSaveEditor.exe (Python 3.10 PyInstaller application), validated against this SQL dump.",
+        "account_id_column": "c_3536de9619",
+        "account_id_in_this_dump": 1
+    },
+    "editing_notes": [
+        "Use the SQLCipher-encrypted database, not this export, for direct edits.",
+        "Close the game and create a backup before changing the save.",
+        "Only entries marked verified are backed by the editor's operation bytecode. Partial entries identify the structure but not every field's purpose.",
+        "The game may reset currencies that have not yet been unlocked in normal play."
+    ],
+    "entities": [
+        {
+            "entity": "Wallet",
+            "table": "tb_e973c32e29",
+            "confidence": "verified",
+            "primary_key": "c_3536de9619",
+            "columns": {
+                "c_3536de9619": "Account ID",
+                "c_d1f333420b": "Gold",
+                "c_418025e253": "Player skill scrolls",
+                "c_ac7e41767f": "Weapon skill scrolls",
+                "c_a9d19edb77": "Special skill scrolls",
+                "c_8ecb8b7c8e": "Identity skill scrolls",
+                "c_e3a43fc510": "Created timestamp",
+                "c_0f31ae5404": "Updated timestamp"
+            },
+            "currency_columns_not_individually_named": [
+                "c_8eeb2dff8f",
+                "c_ea66ef6b36",
+                "c_c973d0be19",
+                "c_9ca5795482",
+                "c_2ffa36039d",
+                "c_8a61c5bdc3",
+                "c_92bc783bfb",
+                "c_ee8d21f72f",
+                "c_af532e64a3",
+                "c_4d33d95535",
+                "c_4a6ac4abc2",
+                "c_a8ef243f1d",
+                "c_b5fada1817",
+                "c_295f58dcb1",
+                "c_6c862c90eb",
+                "c_daaa24a518",
+                "c_e0eaf5a313",
+                "c_68e62b0e0c",
+                "c_e84d82693c"
+            ],
+            "excluded_fields": {
+                "c_3536de9619": "Account ID, not a currency",
+                "c_8ecb8b7c8e": "Identity skill-scroll count, deliberately excluded by the editor's wallet-max operation",
+                "c_e3a43fc510": "Timestamp, not a currency",
+                "c_0f31ae5404": "Timestamp, not a currency"
+            },
+            "safe_editor_limits": {
+                "gold": 999999999,
+                "ordinary_wallet_currency": 999999,
+                "skill_scroll": 99999,
+                "identity_skill_scroll": 4
+            }
+        },
+        {
+            "entity": "Item materials and stackable inventory",
+            "table": "tb_d40f87183c",
+            "confidence": "verified",
+            "primary_key": "c_20bfd7b86b",
+            "columns": {
+                "c_20bfd7b86b": "Material row ID",
+                "c_3536de9619": "Account ID",
+                "c_4ec2cde1a1": "Game item ID",
+                "c_8eb30bb564": "Stack count",
+                "c_29b96fe9bd": "Item category",
+                "c_9e5c145cd6": "Unknown material state field",
+                "c_e3a43fc510": "Created timestamp",
+                "c_0f31ae5404": "Updated timestamp"
+            },
+            "known_item": {
+                "item_id": 19900004,
+                "name": "Hunt Coin",
+                "required_category": 15,
+                "count_column": "c_8eb30bb564",
+                "safe_editor_limit": 999999
+            }
+        },
+        {
+            "entity": "Owned costumes, hair, and face accessories",
+            "table": "tb_166244fbb0",
+            "confidence": "verified",
+            "primary_key": "c_ecf8212224",
+            "columns": {
+                "c_ecf8212224": "Ownership row ID",
+                "c_3536de9619": "Account ID",
+                "c_9398111a4b": "Cosmetic category/type",
+                "c_7c18adadfa": "Game cosmetic ID",
+                "c_646f788f95": "Unknown ownership state",
+                "c_e3a43fc510": "Created timestamp",
+                "c_0f31ae5404": "Updated timestamp"
+            },
+            "known_categories": [
+                "Skin",
+                "HairItem",
+                "FaceItem"
+            ]
+        },
+        {
+            "entity": "Costume unlock flags",
+            "table": "tb_4b5c76b06a",
+            "confidence": "partial",
+            "primary_key": "c_9961b47823",
+            "columns": {
+                "c_9961b47823": "Unlock row ID"
+            },
+            "notes": "The editor inserts unlock rows here when granting cosmetics, but its bytecode does not expose a complete semantic column map."
+        },
+        {
+            "entity": "Owned emoticons",
+            "table": "tb_b2bf39bbc2",
+            "confidence": "partial",
+            "primary_key": "c_20bfd7b86b",
+            "columns": {
+                "c_20bfd7b86b": "Ownership row ID",
+                "c_cf6c6441e3": "Game emoticon ID"
+            }
+        },
+        {
+            "entity": "Owned titles",
+            "table": "tb_cc2254ea5d",
+            "confidence": "partial",
+            "primary_key": "c_20bfd7b86b",
+            "columns": {
+                "c_20bfd7b86b": "Ownership row ID",
+                "c_3536de9619": "Account ID",
+                "c_4ec2cde1a1": "Game title ID",
+                "c_f80b15c453": "Ownership/unlock flag",
+                "c_ea247d8f96": "Title expiry timestamp"
+            },
+            "editor_fallback_expiry": "1/1/2038 12:00:00 AM"
+        },
+        {
+            "entity": "Owned profile items",
+            "table": "tb_31beea0a18",
+            "confidence": "partial",
+            "primary_key": "c_20bfd7b86b",
+            "columns": {
+                "c_20bfd7b86b": "Ownership row ID",
+                "c_3536de9619": "Account ID",
+                "c_4ec2cde1a1": "Game profile-item ID",
+                "c_29b96fe9bd": "Profile-item category"
+            },
+            "known_categories": {
+                "17": "Background",
+                "18": "Icon",
+                "19": "Border",
+                "54": "Profile card"
+            }
+        },
+        {
+            "entity": "Skill-scroll storage",
+            "table": "tb_957a223c9b",
+            "confidence": "verified",
+            "primary_key": "c_fc7ba2e8c9",
+            "columns": {
+                "c_fc7ba2e8c9": "Storage row ID",
+                "c_1692f32794": "Slot/index",
+                "c_bc37480bfc": "Active state",
+                "c_418025e253": "Player skill scroll count",
+                "c_ac7e41767f": "Weapon skill scroll count",
+                "c_a9d19edb77": "Special skill scroll count"
+            }
+        },
+        {
+            "entity": "Achievements",
+            "table": "tb_3352b063a3",
+            "confidence": "verified",
+            "primary_key": "c_6c5f863c93",
+            "columns": {
+                "c_6c5f863c93": "Achievement row ID",
+                "c_3536de9619": "Account ID",
+                "c_944ad16d45": "Achievement category",
+                "c_0cc7c09467": "Achievement group ID",
+                "c_10f0449b65": "Current tier/step ID",
+                "c_6bc9af4667": "Reward state",
+                "c_e3bc20d6ba": "Reached/claimable state",
+                "c_6dc52e9c30": "Progress counter",
+                "c_84aada8c5b": "Claimed state",
+                "c_43609831f9": "Unknown nullable state",
+                "c_df30879632": "Epoch/state value",
+                "c_0f31ae5404": "Created timestamp",
+                "c_e3a43fc510": "Updated timestamp"
+            },
+            "known_categories": {
+                "0": "General",
+                "1": "Collection",
+                "2": "Growth",
+                "3": "Dungeon"
+            }
+        },
+        {
+            "entity": "Game difficulty",
+            "table": "tb_bf41c3a26c",
+            "confidence": "partial",
+            "columns": {
+                "c_8401e00524": "Difficulty value"
+            },
+            "known_values": {
+                "0": "Normal",
+                "1": "Hard",
+                "2": "New Game Plus"
+            }
+        },
+        {
+            "entity": "Character roster",
+            "table": "tb_13c52bbaa8",
+            "confidence": "partial",
+            "primary_key": "c_d4f6740b9b",
+            "columns": {
+                "c_d4f6740b9b": "Roster row ID",
+                "c_3536de9619": "Account ID",
+                "c_d79538c3b8": "Roster character type",
+                "c_9398111a4b": "Game character ID",
+                "c_e3aa3bf474": "Character level"
+            },
+            "notes": "The editor uses this table to locate playable hunter records."
+        },
+        {
+            "entity": "Player profile counters",
+            "table": "tb_b58cac293e",
+            "confidence": "partial",
+            "columns": {
+                "c_df64875af0": "Hunter-count profile counter",
+                "c_9247ca8dc9": "Achievement-count profile counter"
+            }
+        },
+        {
+            "entity": "Character equipment",
+            "table": "tb_f31af2db6c",
+            "confidence": "partial",
+            "columns": {},
+            "notes": "Used by the editor while repairing profile counters and granting hidden hunters; field-level meanings are not verified."
+        },
+        {
+            "entity": "Awakening or character skill levels",
+            "table": "tb_4a8ea3fd02",
+            "confidence": "partial",
+            "columns": {
+                "c_a2eedee461": "Slot/preset index",
+                "c_bb428f8ca1": "Awakening node or skill group ID",
+                "c_00b83fab96": "Awakening or skill level",
+                "c_547aa5d61c": "Skill row ID",
+                "c_d4f6740b9b": "Owning roster row ID",
+                "c_8a8c363d84": "Unknown skill flag"
+            },
+            "notes": "The editor uses this same table for both awakening-node and hunter-skill operations. Individual rows must be correlated with the roster before modification."
+        }
+    ],
+    "unmapped_schema_policy": "All tables and columns not listed above remain intentionally unmapped. Their hashed names alone do not establish game meaning; identify them by controlled before/after save comparisons or further bytecode analysis."
+}

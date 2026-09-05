@@ -1,0 +1,78 @@
+# Readme has to be included explicitly (because we exclude every other one in the root dir (see next section))
+!README.md
+
+# Have to remove some reports of entity maps etc. because of the file sizes, the semantics report alone is ~24mb.
+#  I left the baseline entity map for the player stats there because the file size is fine.
+#   You can generate all this yourself anyways with the provided tools if really needed.
+docs/dev_docs/reports/
+docs/dev_docs/mappings/entity_map_comparative.json
+
+
+# AI Agentic stuff and files for development support and experiments
+#	If someone is interested on how did I work with an multi-agent workflow with checkpoints, intercomms through .md files etc. 
+#	then let me know and I will make a seperate branch including this
+*.md
+!/docs/
+!/docs/**/*.md
+analysis/
+
+# data/ dir scripts, assets and my exported inventory which are not needed
+data/create_icon.py
+data/appicon.jpg
+data/inventory.csv
+
+# Python environments and bytecode
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+
+# Tooling and test output
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Python and executable build output
+build/
+dist/
+*.egg-info/
+
+# Local settings, secrets, and save artifacts
+.env
+.env.*
+!.env.example
+*.db
+*.db-wal
+*.db-shm
+*.bak
+SaveEditorBackups/
+settings.json
+
+# Editor, OS, and temporary files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp
+
+# Bulk decoded GameData produced by tools/decode_gamedata.py (regenerable, large)
+decoded/
+analysis/work/
+
+# Read-only source evidence: original saves, Unity data, legacy artifacts (large, immutable, never committed)
+OldDevelopingFiles/
+
+# Disposable scratch workspace used for end-to-end validation against copied saves
+_scratch_disposable/
+
+# Vendor parser is a small (~20KB) required runtime dependency, not bytecode cache output
+!vendor/*.pyc
