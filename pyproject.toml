@@ -7,11 +7,11 @@ name = "savegame-editor"
 version = "0.1.0"
 description = "Local-only desktop editor for Solo Leveling: ARISE OVERDRIVE saves"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10,<3.11"
 license = { text = "MIT" }
 authors = [{ name = "SaveGameEditor contributors" }]
 dependencies = [
-    "PySide6>=6.8",
+    "pyside6>=6.5,<7",
     "qasync>=0.27",
 ]
 
@@ -36,7 +36,7 @@ pythonpath = ["src"]
 testpaths = ["tests"]
 
 [tool.ruff]
-target-version = "py312"
+target-version = "py310"
 line-length = 100
 
 [tool.ruff.lint]
@@ -45,6 +45,6 @@ ignore = ["E501"]
 
 [tool.pyright]
 include = ["src", "tests"]
-pythonVersion = "3.12"
+pythonVersion = "3.10"
 typeCheckingMode = "standard"
 reportMissingTypeStubs = false

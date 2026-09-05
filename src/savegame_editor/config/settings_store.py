@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 import json
 import os
 import tempfile
@@ -16,16 +17,33 @@ class SettingsStoreError(RuntimeError):
 
 
 def default_settings_path() -> Path:
-    """Return a platform-appropriate user configuration path, never a project path."""
-    config_root = Path(os.environ.get("APPDATA", Path.home() / ".config"))
-    return config_root / "SaveGameEditor" / "settings.json"
+    """Return the default settings path.
+
+    Packaged executable:
+        <executable-directory>/settings.json
+
+    Ordinary Python script:
+        <script-directory>/config/settings.json
+    """
+    if getattr(sys, "frozen", False):
+        return Path(sys.executable).resolve().parent / "settings.json"
+
+    root_directory = Path(sys.argv[0]).resolve().parent
+    return root_directory / "config" / "settings.json"
 
 
 class SettingsStore:
     """Persists ``EditorSettings`` atomically at an injected local path."""
 
     def __init__(self, path: Path | None = None) -> None:
-        self._path = path or default_settings_path()
+        self._path = Path(path) if path is not None else default_settings_path()
+
+        if self._path.exists():
+            if not self._path.is_file():
+                raise ValueError(f"Settings path is not a file: {self._path}")
+            return
+
+        self._path.parent.mkdir(parents=True, exist_ok=True)
 
     @property
     def path(self) -> Path:
