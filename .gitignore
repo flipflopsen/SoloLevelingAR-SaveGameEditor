@@ -1,6 +1,3 @@
-# Readme has to be included explicitly (because we exclude every other one in the root dir (see next section))
-!README.md
-
 # Have to remove some reports of entity maps etc. because of the file sizes, the semantics report alone is ~24mb.
 #  I left the baseline entity map for the player stats there because the file size is fine.
 #   You can generate all this yourself anyways with the provided tools if really needed.
@@ -12,6 +9,7 @@ docs/dev_docs/mappings/entity_map_comparative.json
 #	If someone is interested on how did I work with an multi-agent workflow with checkpoints, intercomms through .md files etc. 
 #	then let me know and I will make a seperate branch including this
 *.md
+!README.md
 !/docs/
 !/docs/**/*.md
 analysis/
